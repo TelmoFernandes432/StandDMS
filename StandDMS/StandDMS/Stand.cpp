@@ -11,7 +11,7 @@ namespace standCaution {
 
 int Stand::standNumberCheck(int standNumber) {
 	if (standNumber < standCaution::MIN_STAND_NUMBER || standNumber > standCaution::MAX_STAND_NUMBER) {
-		throw std::out_of_range( std::format("standNumber {} fora do intervalo permitido [{}-{}]", standNumber, standCaution::MIN_STAND_NUMBER,standCaution::MAX_STAND_NUMBER)); /*try catch here!*/
+		throw std::out_of_range( std::format("standNumber {}, this is out of range [{}-{}]", standNumber, standCaution::MIN_STAND_NUMBER,standCaution::MAX_STAND_NUMBER)); /*try catch here!*/
 	}
 	return standNumber;
 }

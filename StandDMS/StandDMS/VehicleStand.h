@@ -1,25 +1,48 @@
 #ifndef VEHICLESTAND_H
 #define VEHICLESTAND_H
-#include "Vehicle.h"
 #include "Stand.h"
+#include "Vehicle.h"
 #include <vector>
-#include <list>
-#include <unordered_map>
+
+class StandAggregate {
+
+private:
+	std::unique_ptr<Stand> m_stand;
+	std::vector<std::unique_ptr<Vehicle>> m_vehiclesConteiner{};
+public:
+
+	StandAggregate() = default;
+
+	StandAggregate(std::unique_ptr<Stand> stand)
+		: m_stand{ std::move(stand) }
+	{
+		m_vehiclesConteiner.reserve(2);
+	}
+
+	Stand* getStand() const { /* Care: if I did something like return std::move(m_stand), I would change m_stand properti and this would become null after move */
+		return m_stand.get();
+	}
+
+
+	std::vector<std::unique_ptr<Vehicle>> const& getUnits() const
+	{
+		return m_vehiclesConteiner;
+	}
+
+	~StandAggregate() {};
+
+};
+
 
 class VehicleStand {
 private:
-	std::vector<Stand> m_standsContainer{};
+	std::vector<StandAggregate> m_standVehicleInventory;
+
 public:
+	VehicleStand() = default;
 
-	VehicleStand() {
-		m_standsContainer.reserve(2); /*Lets alocate initialy at least space for 2 spaces*/
-	}
-
-	void insertVehicle(Stand stand, Vehicle vehicle) {
-		m_standsContainer.push_back(stand);
-		stand.insertVehicle(std::move(vehicle));
-	}
 
 };
+
 
 #endif

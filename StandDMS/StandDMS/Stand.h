@@ -22,7 +22,6 @@ private:
 
 public:
 
-
     Stand() = default;
 
     Stand(const std::string& standCity, int standNumber) 

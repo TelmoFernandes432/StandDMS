@@ -1,5 +1,6 @@
 // StandDMS.cpp : This file contains the 'main' function. Program execution begins and ends there.
 #include <iostream>
+#include <sstream>
 #include "Vehicle.h"
 #include "Car.h"
 #include "Coupe.h"
@@ -36,11 +37,19 @@ int main()
     std::cout << mySedanPtr4->toString() << std::endl;
 
 
-   Stand myStand1("Lisboa", 100);
+
+    try {
+        Stand myStand1("Lisboa", 100);
+        std::cout << myStand1.toString();
+    }
+    catch (std::out_of_range& e) {
+        std::cout << "Exception: " << e.what();
+    }
+
     /*Stand myStand2("Aveiro", 02);
     Stand myStand3("Barcelos", 03);*/
 
-    std::cout << myStand1.toString();
+    //std::cout << myStand1.toString();
     /*std::cout << myStand2.toString();
     std::cout << myStand3.toString();*/
 
