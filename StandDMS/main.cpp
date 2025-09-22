@@ -36,7 +36,7 @@ int main()
     std::cout << mySedanPtr4->toString() << std::endl;
 
 
-   Stand myStand1("Lisboa", 100);
+   Stand myStand1("Lisboa", 99);
     /*Stand myStand2("Aveiro", 02);
     Stand myStand3("Barcelos", 03);*/
 

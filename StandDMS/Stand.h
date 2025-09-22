@@ -1,6 +1,7 @@
 #ifndef STAND_H
 #define STAND_H
 #include "Vehicle.h"
+#include <string>
 #include <iostream>
 #include <iomanip>
 #include <list>
@@ -13,7 +14,8 @@ private:
    
     std::string m_standCity;
     unsigned int m_standNumber;
-    static std::vector<std::string> m_codes; /*This belongs to the class*/
+    std::string m_codes;
+    static std::vector<std::string> m_codesArray; /*This belongs to the class*/
 
     static std::string generateCode(const std::string& standCity, int standNumber);
     static bool existCode(const std::string& code);
@@ -29,6 +31,10 @@ public:
         : m_standCity(standCity), 
         m_standNumber(standNumberCheck(standNumber)) 
     {}
+    
+    const std::string& getCode() const {
+        return m_codes;
+    }
 
     std::string toString() const;
 
