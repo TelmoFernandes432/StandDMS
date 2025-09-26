@@ -37,12 +37,12 @@ int main()
 
 
    Stand myStand1("Lisboa", 99);
-    /*Stand myStand2("Aveiro", 02);
-    Stand myStand3("Barcelos", 03);*/
+   Stand myStand2("Aveiro", 02);
+   Stand myStand3("Barcelos", 03);
 
-    std::cout << myStand1.toString();
-    /*std::cout << myStand2.toString();
-    std::cout << myStand3.toString();*/
+   std::cout << myStand1.toString();
+   std::cout << myStand2.toString();
+   std::cout << myStand3.toString();
 
 
 

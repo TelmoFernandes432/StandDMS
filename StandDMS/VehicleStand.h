@@ -5,6 +5,15 @@
 #include <vector>
 #include <optional>
 
+
+namespace StandFunctionReturnValue {
+
+	enum class valueReturn {
+		standInsertedSucceed,
+		standNotFound,
+	};
+}
+
 class StandAggregate {
 
 private:
@@ -24,35 +33,42 @@ public:
 		return m_stand.get();
 	}
 
-	std::vector<std::unique_ptr<Vehicle>> const& getUnits() const
+	std::vector<std::unique_ptr<Vehicle>> const& getVehiclesUnits() const
 	{
 		return m_vehiclesConteiner;
 	}
+	
+	void setVehicleIntoStand(std::unique_ptr<Vehicle> vehicleInsert);
+	void setStand(Stand& standInsert);
+
+	StandFunctionReturnValue::valueReturn insertVehicleIntoStand(std::unique_ptr<Vehicle> vehicle, const Stand& stand);
 
 	~StandAggregate() {};
 
 };
 
 
-class VehicleStand {
+class VehicleStandGroup {
 
 private:
 	std::vector<StandAggregate> m_standVehicleInventory;
 
 public:
-	VehicleStand() = default;
+	VehicleStandGroup() = default; /*See notes down there */
 
-	void insertVehicleIntoStand(std::unique_ptr<Vehicle> vehicle, const Stand& stand) {
-		for (auto& it : m_standVehicleInventory) {
-			if (stand.getCode() == it.getStand()->getCode()) {
-				it.addVehicle(std::move(vehicle));
-				return;
-			}
-		}
-		/*Does throw here make sence? */
-		throw std::runtime_error("Stand not found in inventory");
-	}
+	void insertNewStand(Stand& stand);
+
+	StandFunctionReturnValue::valueReturn insertVehicleIntoStand(std::unique_ptr<Vehicle> vehicle, const Stand& stand);
+	
 };
-
-
 #endif
+
+
+/*
+	StandAggregate standAgg;
+	VehicleStand vs;
+
+	vs.m_standVehicleInventory.push_back(standAgg);       // copia
+	vs.m_standVehicleInventory.push_back(std::move(standAgg)); // move (standAgg fica "vazio")
+	vs.m_standVehicleInventory.emplace_back(/* args );
+*/

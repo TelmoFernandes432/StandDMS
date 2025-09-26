@@ -2,7 +2,7 @@
 #include <string>
 #include "Stand.h"
 
-std::vector<std::string> Stand::m_codes;
+std::vector<std::string> Stand::m_codesArray;
 
 namespace standCaution {
 	static const int MIN_STAND_NUMBER = 1;
@@ -11,18 +11,20 @@ namespace standCaution {
 
 int Stand::standNumberCheck(int standNumber) {
 	if (standNumber < standCaution::MIN_STAND_NUMBER || standNumber > standCaution::MAX_STAND_NUMBER) {
-		throw std::out_of_range( std::format("standNumber {} fora do intervalo permitido [{}-{}]", standNumber, standCaution::MIN_STAND_NUMBER,standCaution::MAX_STAND_NUMBER)); /*try catch here!*/
+		//throw std::out_of_range( std::format("standNumber {} fora do intervalo permitido [{}-{}]", standNumber, standCaution::MIN_STAND_NUMBER,standCaution::MAX_STAND_NUMBER)); /*try catch here!*/
+
 	}
 	return standNumber;
 }
 
+
 void Stand::addCode(const std::string& code) {
-	if(!existCode(code))
-		m_codes.push_back(code);
+	if (!existCode(code))
+		m_codesArray.push_back(code);
 }
 
 bool Stand::existCode(const std::string& code) {
-	for (const auto& it : Stand::m_codes) {
+	for (const auto& it : m_codesArray) {
 		if (code == it)
 			return true;
 	}
@@ -35,6 +37,8 @@ std::string Stand::generateCode(const std::string& standCity, int standNumber) {
 
 /*std::format already return a string*/
 std::string Stand::toString() const {
-	return std::format("{}{:02}", m_standCity, m_standNumber);
-}
+	std::ostringstream oss;
+	oss << std::format("{}{:02}", m_standCity, m_standNumber) << std::endl;
 
+	return oss.str();
+}

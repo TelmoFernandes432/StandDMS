@@ -16,8 +16,7 @@ protected:
 
 public:
 
-    Vehicle()
-    {}
+    Vehicle() = default;
 
     Vehicle(unsigned int licensePlateYear)
         : Vehicle(licensePlateYear, "Unknown")
