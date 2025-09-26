@@ -5,6 +5,7 @@
 #include "Coupe.h"
 #include "Sedan.h"
 #include "Stand.h"
+#include "VehicleStand.h"
 
 int Vehicle::s_nextID = 0;
 
@@ -45,7 +46,19 @@ int main()
    std::cout << myStand3.toString();
 
 
+   VehicleStandGroup VehicleStand;
 
+   std::unique_ptr<Vehicle> myVehiclePtr = std::make_unique<Sedan>(2018, "BMW");
+   std::unique_ptr<Vehicle> myVehiclePtr2 = std::make_unique<Car>(2019, "Opel");
+
+   VehicleStand.InsertNewStand(myStand1);
+   VehicleStand.insertNewVehicleStand(std::move(myVehiclePtr), myStand1);
+   VehicleStand.InsertNewStand(myStand2);
+   VehicleStand.insertNewVehicleStand(std::move(myVehiclePtr2), myStand2);
+
+   
+   std::cout << VehicleStand.toString();
+   
 
     return 0;
 }

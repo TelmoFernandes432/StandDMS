@@ -14,36 +14,24 @@ namespace StandFunctionReturnValue {
 	};
 }
 
-class StandAggregate {
+class StandVehicleAggregate {
 
 private:
-	std::unique_ptr<Stand> m_stand;
-	std::vector<std::unique_ptr<Vehicle>> m_vehiclesConteiner{};
+	Stand m_stand;
+	std::vector<std::unique_ptr<Vehicle>> m_vehiclesConteiner{}; /* Polymorphism pointer needed here! */
+
 public:
 
-	StandAggregate() = default;
+	StandVehicleAggregate() = default;
 
-	StandAggregate(std::unique_ptr<Stand> stand)
-		: m_stand{ std::move(stand) }
-	{
-		m_vehiclesConteiner.reserve(2);
-	}
 
-	Stand* getStand() const { /* Care: if I did something like return std::move(m_stand), I would change m_stand properti and this would become null after move */
-		return m_stand.get();
-	}
+	void setStand(const Stand& stand) { m_stand = stand; };
+	void setVehicle(std::unique_ptr<Vehicle> vehicle) { m_vehiclesConteiner.push_back(std::move(vehicle)); };
+	Stand getStand() const { return m_stand; };
 
-	std::vector<std::unique_ptr<Vehicle>> const& getVehiclesUnits() const
-	{
+	const std::vector<std::unique_ptr<Vehicle>>& getVehiclesConteiner() const {
 		return m_vehiclesConteiner;
 	}
-	
-	void setVehicleIntoStand(std::unique_ptr<Vehicle> vehicleInsert);
-	void setStand(Stand& standInsert);
-
-	StandFunctionReturnValue::valueReturn insertVehicleIntoStand(std::unique_ptr<Vehicle> vehicle, const Stand& stand);
-
-	~StandAggregate() {};
 
 };
 
@@ -51,24 +39,26 @@ public:
 class VehicleStandGroup {
 
 private:
-	std::vector<StandAggregate> m_standVehicleInventory;
+	std::vector<std::unique_ptr<StandVehicleAggregate>> m_standVehicleInventory;
 
 public:
-	VehicleStandGroup() = default; /*See notes down there */
 
-	void insertNewStand(Stand& stand);
+	VehicleStandGroup() {
+		m_standVehicleInventory.reserve(3); /*At least reserve 3*/
+	}
 
-	StandFunctionReturnValue::valueReturn insertVehicleIntoStand(std::unique_ptr<Vehicle> vehicle, const Stand& stand);
-	
+	const std::vector<std::unique_ptr<StandVehicleAggregate>>& getStandVehicleInventory() const {
+		return m_standVehicleInventory;
+	}
+
+	void InsertNewStand(const Stand& stand);
+
+	StandFunctionReturnValue::valueReturn insertNewVehicleStand(std::unique_ptr<Vehicle> vehicle, Stand& stand);
+
+	const std::string toString();
+
 };
+
 #endif
 
 
-/*
-	StandAggregate standAgg;
-	VehicleStand vs;
-
-	vs.m_standVehicleInventory.push_back(standAgg);       // copia
-	vs.m_standVehicleInventory.push_back(std::move(standAgg)); // move (standAgg fica "vazio")
-	vs.m_standVehicleInventory.emplace_back(/* args );
-*/

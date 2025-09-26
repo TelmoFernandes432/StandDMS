@@ -135,7 +135,7 @@
     <ClCompile Include="Sedan.cpp" />
     <ClCompile Include="Stand.cpp" />
     <ClCompile Include="Vehicle.cpp" />
-    <ClCompile Include="VehicleStandcpp.cpp" />
+    <ClCompile Include="VehicleStand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h" />
