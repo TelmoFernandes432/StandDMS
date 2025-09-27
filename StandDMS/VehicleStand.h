@@ -24,7 +24,6 @@ public:
 
 	StandVehicleAggregate() = default;
 
-
 	void setStand(const Stand& stand) { m_stand = stand; };
 	void setVehicle(std::unique_ptr<Vehicle> vehicle) { m_vehiclesConteiner.push_back(std::move(vehicle)); };
 	Stand getStand() const { return m_stand; };

@@ -7,9 +7,8 @@ class Car : public Vehicle {
 
 private:
 	int m_numPorts{};
-public:
 
-	Car() {}
+public:
 
 	Car(unsigned int licensePlateYear, const std::string& brand) : Vehicle(licensePlateYear, brand){}
 
@@ -21,7 +20,7 @@ public:
 	void setNumPorts(int numPorts) { m_numPorts = numPorts; };
 	int getNumPorts() const { return m_numPorts; };
 
-	virtual std::string toString() const;
+	virtual std::string toString() const override;
 };
 
 

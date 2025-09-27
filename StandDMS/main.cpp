@@ -12,7 +12,7 @@ int Vehicle::s_nextID = 0;
 int main()
 {
 
-    Coupe mycoupe1(2017, "Nissan");
+   /* Coupe mycoupe1(2017, "Nissan");
     Coupe mycoupe2(2021, "Opel");
 
     Sedan mySedan1(2018, "BMW");
@@ -34,32 +34,30 @@ int main()
     std::cout << mySedanPtr1->toString() << std::endl;
     std::cout << mySedanPtr2->toString() << std::endl;
     std::cout << mySedanPtr3->toString() << std::endl;
-    std::cout << mySedanPtr4->toString() << std::endl;
+    std::cout << mySedanPtr4->toString() << std::endl;*/
 
 
-   Stand myStand1("Lisboa", 99);
+   Stand myStand1("Lisboa", 01);
    Stand myStand2("Aveiro", 02);
    Stand myStand3("Barcelos", 03);
 
    std::cout << myStand1.toString();
    std::cout << myStand2.toString();
-   std::cout << myStand3.toString();
-
+   std::cout << myStand3.toString() << "\n";
 
    VehicleStandGroup VehicleStand;
 
+ 
    std::unique_ptr<Vehicle> myVehiclePtr = std::make_unique<Sedan>(2018, "BMW");
-   std::unique_ptr<Vehicle> myVehiclePtr2 = std::make_unique<Car>(2019, "Opel");
+   std::unique_ptr<Vehicle> myVehiclePtr2 = std::make_unique<Coupe>(2019, "Opel");
 
    VehicleStand.InsertNewStand(myStand1);
    VehicleStand.insertNewVehicleStand(std::move(myVehiclePtr), myStand1);
    VehicleStand.InsertNewStand(myStand2);
    VehicleStand.insertNewVehicleStand(std::move(myVehiclePtr2), myStand2);
 
-   
    std::cout << VehicleStand.toString();
    
-
     return 0;
 }
 

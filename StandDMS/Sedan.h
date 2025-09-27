@@ -10,7 +10,7 @@ private:
 	static constexpr int NUMBER_OF_PORTS = 4;
 
 public:
-	Sedan() {};
+	Sedan();
 
 	Sedan(unsigned int licensePlateYear, const std::string& brand) :
 		Car(licensePlateYear, brand)

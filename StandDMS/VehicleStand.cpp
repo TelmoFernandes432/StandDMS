@@ -21,14 +21,15 @@ StandFunctionReturnValue::valueReturn VehicleStandGroup::insertNewVehicleStand(s
 }
 
 const std::string VehicleStandGroup::toString() {
-	std::cout << "\n \n";
 	std::ostringstream oss;
 
 	for (const auto& it : m_standVehicleInventory) {
 		std::cout << it->getStand().getCode() << "\n";
 		
-		for (const auto& i : it->getVehiclesConteiner())
-			std::cout << i->toString();
+		for (const auto& it : it->getVehiclesConteiner())
+			std::cout << it->toString();
+
+		std::cout << std::endl;
 	}
 
 	return oss.str();

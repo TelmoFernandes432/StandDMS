@@ -1,7 +1,8 @@
 #include "Vehicle.h"
 #include <sstream>
 
-std::string Vehicle::toString() {
+std::string Vehicle::toString() const {
+
     std::ostringstream oss;
 
     oss << "Vehicle ID: " << m_vehicleID

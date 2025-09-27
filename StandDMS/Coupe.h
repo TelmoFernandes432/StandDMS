@@ -12,7 +12,7 @@ private:
 
 public:
 
-	Coupe() {};
+	Coupe();
 
 	Coupe(unsigned int licensePlateYear, const std::string& brand) :
 		Car(licensePlateYear, brand)

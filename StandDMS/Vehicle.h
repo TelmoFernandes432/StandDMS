@@ -10,13 +10,13 @@ class Vehicle {
 
 protected:
     static int s_nextID;
-    int  m_vehicleID;
+    int m_vehicleID;
     unsigned int m_licensePlateYear{};
     std::string m_brand{};
 
 public:
 
-    Vehicle() = default;
+    Vehicle();
 
     Vehicle(unsigned int licensePlateYear)
         : Vehicle(licensePlateYear, "Unknown")
@@ -31,15 +31,12 @@ public:
     void setLicensePlateYear(unsigned int licensePlateYear) { m_licensePlateYear = licensePlateYear; };
     void setBrand(std::string& brand) { m_brand = brand; };
     
-
     unsigned int getLicensePlateYear() const { return m_licensePlateYear; };
     std::string getBrand() const { return m_brand; };
     unsigned int getVehicleID() const { return m_vehicleID; };
-    
-    
-    std::string toString();
+    virtual std::string toString() const;
 
-  
+
     virtual ~Vehicle() = default;
 
     /*Overload operator <<*/
