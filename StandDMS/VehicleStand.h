@@ -4,15 +4,8 @@
 #include "Vehicle.h"
 #include <vector>
 #include <optional>
+#include "FunctionReturn.h"
 
-
-namespace StandFunctionReturnValue {
-
-	enum class valueReturn {
-		standInsertedSucceed,
-		standNotFound,
-	};
-}
 
 class StandVehicleAggregate {
 

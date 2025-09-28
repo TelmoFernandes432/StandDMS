@@ -12,11 +12,16 @@ private:
 
 public:
 
-	Coupe();
+	Coupe() = default;
 
 	Coupe(unsigned int licensePlateYear, const std::string& brand) :
 		Car(licensePlateYear, brand)
-	{ }
+	{}
+
+	Coupe(unsigned int licensePlateYear, const std::string& brand, fuelType fuel)
+		: Car(NUMBER_OF_PORTS, licensePlateYear, brand, fuel)
+	{}
+
 
 	std::string toString() const override;
 

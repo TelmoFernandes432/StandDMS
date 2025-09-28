@@ -1,7 +1,7 @@
 #include "VehicleStand.h"
 #include "Stand.h"
 #include "Vehicle.h"
-
+#include "FunctionReturn.h"
 
 void VehicleStandGroup::InsertNewStand(const Stand& stand) {
 	auto aggregatePtr = std::make_unique<StandVehicleAggregate>();

@@ -10,11 +10,11 @@ private:
 
 public:
 
-	Car(unsigned int licensePlateYear, const std::string& brand) : Vehicle(licensePlateYear, brand){}
+	Car(unsigned int licensePlateYear, const std::string& brand) : Vehicle(licensePlateYear, brand, fuelType::UKNOWN){}
 
-	Car(int numPorts, unsigned int licensePlateYear, const std::string& brand) : 
-		Vehicle(licensePlateYear, brand), 
-		m_numPorts{ numPorts } 
+	Car(int numPorts, unsigned int licensePlateYear, const std::string& brand, fuelType fuel) : 
+		Vehicle(licensePlateYear, brand, fuel), 
+		m_numPorts{ numPorts }
 	{}
 
 	void setNumPorts(int numPorts) { m_numPorts = numPorts; };

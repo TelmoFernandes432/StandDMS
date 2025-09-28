@@ -36,6 +36,9 @@
     <ClCompile Include="VehicleStand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Motorcycle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vehicle.h">
@@ -54,6 +57,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VehicleStand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionReturn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotorCycle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

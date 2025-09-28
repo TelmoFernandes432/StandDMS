@@ -16,6 +16,11 @@ public:
 		Car(licensePlateYear, brand)
 	{}
 
+	Sedan(unsigned int licensePlateYear, const std::string& brand, fuelType fuel)
+		: Car(NUMBER_OF_PORTS, licensePlateYear, brand, fuel)
+	{}
+
+
 	std::string toString() const override;
 
 	~Sedan() {};
