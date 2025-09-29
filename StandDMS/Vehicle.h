@@ -56,6 +56,10 @@ public:
 
     friend std::string convertString(fuelType type);
 
+
+    virtual std::string objectType() const;
+
+
     virtual ~Vehicle() = default;
 
     /*Overload operator <<*/

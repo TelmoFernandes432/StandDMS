@@ -21,6 +21,10 @@ public:
 	int getNumPorts() const { return m_numPorts; };
 
 	virtual std::string toString() const override;
+
+	std::string objectType() const {
+		return "Car!";
+	}
 };
 
 

@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="Coupe.cpp" />
+    <ClCompile Include="FactoryClass.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motorcycle.cpp" />
     <ClCompile Include="Sedan.cpp" />

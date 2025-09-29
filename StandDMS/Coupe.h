@@ -25,6 +25,10 @@ public:
 
 	std::string toString() const override;
 
+	std::string objectType() const override {
+		return "Coupe!";
+	}
+
 	~Coupe() {};
 
 };
