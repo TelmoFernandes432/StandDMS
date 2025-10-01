@@ -26,22 +26,28 @@ namespace UserInputHandler {      //Coupe(unsigned int licensePlateYear, const s
     }
 
     inline std::string brand() {
+        std::string userbrand;
 
-        std::string userbrand{};
+        while (true) {
+            std::cout << "Insert vehicle brand: ";
+            std::getline(std::cin, userbrand);
 
-        while (1) {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Insert vehicle brand: " << std::endl;
-            getline(std::cin, userbrand);
-            if (std::any_of(userbrand.begin(), userbrand.end(), [](unsigned char c) { return std::isdigit(c); })) {
-                std::cout << "Invalid input" << std::endl;
-                brand();
+            // Verifica se contém números
+            bool hasDigits = std::any_of(userbrand.begin(), userbrand.end(),
+                [](unsigned char c) { return std::isdigit(c); });
+
+            if (hasDigits || userbrand.empty()) {
+                std::cout << "Invalid input!" << std::endl;
+                std::cin.clear();
             }
-            break;
+            else {
+                break; 
+            }
         }
 
         return userbrand;
     }
+    
 
     inline fuelType Ftype() {
 
