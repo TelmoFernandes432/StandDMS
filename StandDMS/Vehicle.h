@@ -13,7 +13,7 @@ enum class fuelType {
     GASOLINE,
     LPG,
     HYBRID,
-    UKNOWN,
+    UNKNOWN,
     MAX_FUEL_TYPE
 };
 
@@ -33,7 +33,7 @@ public:
     Vehicle() {};
 
     Vehicle(unsigned int licensePlateYear)
-        : Vehicle(licensePlateYear, "Unknown", fuelType::UKNOWN)
+        : Vehicle(licensePlateYear, "Unknown", fuelType::UNKNOWN)
     {}
 
   
@@ -56,10 +56,6 @@ public:
 
     friend std::string convertString(fuelType type);
 
-
-    virtual std::string objectType() const;
-
-
     virtual ~Vehicle() = default;
 
     /*Overload operator <<*/
@@ -80,7 +76,7 @@ inline std::string convertString(fuelType type) {
     case fuelType::GASOLINE: return "Gasoline";
     case fuelType::LPG:      return "LPG";
     case fuelType::HYBRID:   return "Hybrid";
-    case fuelType::UKNOWN:   return "Unknown";
+    case fuelType::UNKNOWN:   return "Unknown";
     case fuelType::MAX_FUEL_TYPE: return "Invalid (MAX_FUEL_TYPE)";
     default: return "Invalid fuel type";
     }

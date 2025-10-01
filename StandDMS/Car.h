@@ -10,7 +10,9 @@ private:
 
 public:
 
-	Car(unsigned int licensePlateYear, const std::string& brand) : Vehicle(licensePlateYear, brand, fuelType::UKNOWN){}
+	Car() = default;
+
+	Car(unsigned int licensePlateYear, const std::string& brand) : Vehicle(licensePlateYear, brand, fuelType::UNKNOWN){}
 
 	Car(int numPorts, unsigned int licensePlateYear, const std::string& brand, fuelType fuel) : 
 		Vehicle(licensePlateYear, brand, fuel), 
@@ -22,9 +24,6 @@ public:
 
 	virtual std::string toString() const override;
 
-	std::string objectType() const {
-		return "Car!";
-	}
 };
 
 

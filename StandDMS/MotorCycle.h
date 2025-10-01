@@ -5,8 +5,8 @@
 
 
 enum class Fairing {
-	hasntFair = false,
-	hasFair = true,
+	hasntFairing = false,
+	hasFairing = true,
 };
 
 class Motorcycle : public Vehicle {
