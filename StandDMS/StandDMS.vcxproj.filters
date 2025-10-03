@@ -42,6 +42,12 @@
     <ClCompile Include="FactoryClass.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="FactoryClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GestStand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vehicle.h">
@@ -66,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MotorCycle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GestStand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

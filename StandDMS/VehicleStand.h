@@ -30,7 +30,7 @@ public:
 
 class VehicleStandGroup {
 
-private:
+protected:
 	std::vector<std::unique_ptr<StandVehicleAggregate>> m_standVehicleInventory;
 
 public:
