@@ -11,16 +11,18 @@ namespace standCaution {
 
 int Stand::standNumberCheck(int standNumber) {
 	if (standNumber < standCaution::MIN_STAND_NUMBER || standNumber > standCaution::MAX_STAND_NUMBER) {
-		//throw std::out_of_range( std::format("standNumber {} fora do intervalo permitido [{}-{}]", standNumber, standCaution::MIN_STAND_NUMBER,standCaution::MAX_STAND_NUMBER)); /*try catch here!*/
-
+		throw std::out_of_range( std::format("stand nuumber {} is outside of range [{}-{}] \n \n", standNumber, standCaution::MIN_STAND_NUMBER,standCaution::MAX_STAND_NUMBER));
 	}
 	return standNumber;
 }
 
 
 void Stand::addCode(const std::string& code) {
-	if (!existCode(code))
+	if (!existCode(code)) {
 		m_codesArray.push_back(code);
+	}
+	else
+		throw std::invalid_argument("Duplicated element " + code + '\n');
 }
 
 bool Stand::existCode(const std::string& code) {

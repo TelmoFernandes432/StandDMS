@@ -1,10 +1,15 @@
 #ifndef ERROHANDLING_H
 #define ERROHANDLING_H
+#include <utility>
 #include <algorithm>
+#include <tuple>
 #include "Vehicle.h"
 #include "Sedan.h"
 #include "Coupe.h"
 #include "MotorCycle.h"
+
+
+void cleanCinBuffer();
 
 namespace StandFunctionReturnValue {
 
@@ -19,15 +24,21 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
 
         unsigned int userLicensePlate{};
 
-        while (1) {
-            std::cout << "Insert vehicle license plate year (xxxx): " << std::endl;
+        while (true) {
+            std::cout << "Insert vehicle license plate year (xxxx): ";
             std::cin >> userLicensePlate;
-            while (!std::cin) {
+
+            if (std::cin.fail()) { 
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Invalid input" << std::endl;
+                std::cout << "Invalid input. Please enter a valid year.\n";
             }
-            break;
+            else if (userLicensePlate < 1000 || userLicensePlate > 9999) {
+                std::cout << "Year must be 4 digits. Try again.\n";
+            }
+            else {
+                break; 
+            }
         }
         return userLicensePlate;
     }
@@ -39,9 +50,7 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
             std::cout << "Insert vehicle brand: ";
             std::getline(std::cin, userbrand);
 
-            // Verifica se contém números
-            bool hasDigits = std::any_of(userbrand.begin(), userbrand.end(),
-                [](unsigned char c) { return std::isdigit(c); });
+            bool hasDigits = std::any_of(userbrand.begin(), userbrand.end(), [](unsigned char c) { return std::isdigit(c); });
 
             if (hasDigits || userbrand.empty()) {
                 std::cout << "Invalid input!" << std::endl;
@@ -81,8 +90,7 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
 
         while (1) {
             while (!(std::cin >> option) || (option >= static_cast<unsigned int>(fuelType::MAX_FUEL_TYPE))) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cleanCinBuffer();
                 std::cout << "Invalid input" << std::endl;
             }
             break;
@@ -98,9 +106,9 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
         while (1) {
             std::cout << "MotorCycle has Fairing? (y)yes or (n)no: \n" << std::endl;
             std::cin >> option;
+
             while (!(std::cin) || (static_cast<char>(std::toupper(option)) != 'Y' && static_cast<char>(std::toupper(option)) != 'N')) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cleanCinBuffer();
                 std::cout << "Invalid input" << std::endl;
             }
             if (option == 'Y') {
@@ -109,6 +117,49 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
             else
                 return Fairing::hasntFairing;
         }
+    }
+
+    inline std::tuple<std::string, std::string, int> userStandCreator() {
+        
+        std::string standCity{};
+
+        while (true) {
+            std::cout << "Please enter the name of the city where you want to create the stand: ";
+            std::getline(std::cin, standCity);
+
+            bool hasDigits = std::any_of(standCity.begin(), standCity.end(), [](unsigned char c) { return std::isdigit(c); });
+
+            if (hasDigits || standCity.empty()) {
+                std::cout << "Invalid input!" << std::endl;
+                std::cin.clear();
+            }
+            else {
+                break;
+            }
+        }
+
+        unsigned int standNumber{};
+
+        while (true) {
+            std::cout << "Please enter a Stand number (Number between 1 and 99): ";
+            std::cin >> standNumber;
+
+            if (std::cin.fail()) {         
+                cleanCinBuffer();
+                std::cout << "Invalid input. Please enter a number between 1 and 99.\n";
+            }
+            else {
+                break; 
+            }
+        }
+        
+        cleanCinBuffer();
+        std::string standAdress;
+
+        std::cout << "Please Insert Stand Adress";
+        std::getline(std::cin, standAdress);
+
+        return std::make_tuple(standCity, standAdress, standNumber);
     }
 }
 

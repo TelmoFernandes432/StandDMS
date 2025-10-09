@@ -3,10 +3,12 @@
 #include "Vehicle.h"
 #include "FunctionReturn.h"
 
-void VehicleStandGroup::InsertNewStand(const Stand& stand) {
+std::size_t VehicleStandGroup::InsertNewStand(const Stand& stand) {
 	auto aggregatePtr = std::make_unique<StandVehicleAggregate>();
 	aggregatePtr->setStand(stand);
 	m_standVehicleInventory.push_back(std::move(aggregatePtr));
+
+	return m_standVehicleInventory.size() - 1;
 }
 
 StandFunctionReturnValue::valueReturn VehicleStandGroup::insertNewVehicleStand(std::unique_ptr<Vehicle> vehicle, Stand& stand) {

@@ -133,11 +133,13 @@
     <ClCompile Include="Coupe.cpp" />
     <ClCompile Include="FactoryClass.cpp" />
     <ClCompile Include="FactoryClass.h" />
+    <ClCompile Include="FunctionReturn.cpp" />
     <ClCompile Include="GestStand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motorcycle.cpp" />
     <ClCompile Include="Sedan.cpp" />
     <ClCompile Include="Stand.cpp" />
+    <ClCompile Include="UserMenu.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="VehicleStand.cpp" />
   </ItemGroup>
@@ -149,6 +151,7 @@
     <ClInclude Include="MotorCycle.h" />
     <ClInclude Include="Sedan.h" />
     <ClInclude Include="Stand.h" />
+    <ClInclude Include="UserMenu.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="VehicleStand.h" />
   </ItemGroup>
