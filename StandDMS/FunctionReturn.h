@@ -29,8 +29,7 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
             std::cin >> userLicensePlate;
 
             if (std::cin.fail()) { 
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cleanCinBuffer();
                 std::cout << "Invalid input. Please enter a valid year.\n";
             }
             else if (userLicensePlate < 1000 || userLicensePlate > 9999) {
@@ -40,6 +39,7 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
                 break; 
             }
         }
+        cleanCinBuffer();
         return userLicensePlate;
     }
 
@@ -60,7 +60,7 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
                 break;
             }
         }
-
+        cleanCinBuffer();
         return userbrand;
     }
 
@@ -156,11 +156,15 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
         cleanCinBuffer();
         std::string standAdress;
 
-        std::cout << "Please Insert Stand Adress";
+        std::cout << "Please insert stand adress: ";
         std::getline(std::cin, standAdress);
 
         return std::make_tuple(standCity, standAdress, standNumber);
     }
+
+
+
+
 }
 
 #endif

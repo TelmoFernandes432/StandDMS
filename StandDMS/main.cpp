@@ -14,33 +14,7 @@
 int Vehicle::s_nextID = 0;
 
 
-//
-//void UserMenu() {
-//
-//    std::string UserVehicleType;
-//
-//    while (1) {
-//        std::cout << "What type of vehicle you want to create? (Sedan, Coupe, MortoCycle) \n";
-//        std::cin >> UserVehicleType;
-//        while (!std::cin) {
-//            std::cin.clear();
-//            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-//            std::cout << "Invalid input" << std::endl;
-//        }
-//
-//        break;
-//    }
-//
-//    std::transform(UserVehicleType.begin(), UserVehicleType.end(), UserVehicleType.begin(), ::toupper);
-//    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); /*clean std::cin buffer*/
-//
-//    if (UserVehicleType == "SEDAN") {
-//        std::unique_ptr<VehicleFactory> createVehicle = std::make_unique<SedanFactory>();
-//        auto myVehicle = createVehicle->createVehicle();
-//        myVehicle->toString();
-//       
-//    }
-//}
+
 
 int main()
 {

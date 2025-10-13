@@ -32,7 +32,7 @@ public:
 };
 
 
-class StandVehicleAggregate : public VehicleStandGroup {
+class StandVehicleAggregate : public VehicleStandGroup { /*onde o objeto StandVehicleAggregate  para aceder ao m_vehicles ? para passar para a função */
 
 private:
 	Stand m_stand;

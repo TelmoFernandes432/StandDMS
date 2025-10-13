@@ -14,35 +14,13 @@ private:
 	
 public:
 
-	void listStandCitys() {
-
-		for (auto& it : m_standCity)
-		{
-			std::cout << "City -> " << it.first << "[";
-			auto first = begin(it.second), last = end(it.second);
-			if (first != last) {                
-				while (true) {
-					std::cout << *first++; /*vector position increment*/
-					if (first == last) break; 
-					std::cout << ", ";
-				}
-			}
-			std::cout << "] \n";
-		}
-	}
-
-	void listCitys() {
-		std::cout << "Cities hosting stands: \n";
-		for (const auto& [citys, _] : m_standCity) {
-			std::cout << citys << "\n";
-		}
-	}
-
-	void insertNewStandCity(const std::string& city, size_t idx) {
-		m_standCity[city].push_back(idx);
-	}
-
-
+	void listStandCitysIndex();
+	bool getStandCitys(const std::string& City, VehicleStandGroup& objectStand);
+	void listCitys();
+	void listCitysStands(VehicleStandGroup&);
+	void insertNewStandCity(const std::string& city, size_t idx);
+	void insertVehicleIntoStand(const std::string& userVehicleType, const std::string& city, const std::string& standCode, VehicleStandGroup& objectStand);
+	void listVehiclesStand(std::string& standCode, VehicleStandGroup&);
 };
 
-#endif // !GESTSTAND_H
+#endif 

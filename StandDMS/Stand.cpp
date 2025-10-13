@@ -40,7 +40,9 @@ std::string Stand::generateCode(const std::string& standCity, int standNumber) {
 /*std::format already return a string*/
 std::string Stand::toString() const {
 	std::ostringstream oss;
-	oss << std::format("{}{:02}", m_standCity, m_standNumber) << std::endl;
+	oss << std::format("{}{:02} ->{}", m_standCity, m_standNumber, m_standAdress) << std::endl;
 
 	return oss.str();
 }
+
+

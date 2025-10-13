@@ -35,7 +35,6 @@ public:
     {
         m_codes = generateCode(standCity, standNumber);
         addCode(m_codes);
-        
     }
     
     const std::string& getCode() const { return m_codes;};
