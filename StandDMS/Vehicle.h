@@ -22,7 +22,7 @@ class Vehicle {
 
 protected:
     static int s_nextID;
-    int m_vehicleID{};
+    unsigned int m_vehicleID{};
     unsigned int m_licensePlateYear{};
     std::string m_brand{};
     fuelType m_fuelType{};
@@ -38,7 +38,7 @@ public:
 
   
     Vehicle(unsigned int licensePlateYear, const std::string& brand, fuelType fuel)
-        : m_vehicleID{ ++s_nextID },
+        : m_vehicleID{ static_cast<unsigned int>(++s_nextID)},
         m_licensePlateYear{ licensePlateYear },
         m_brand{ brand },
         m_fuelType{ fuel }

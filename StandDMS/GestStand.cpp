@@ -1,8 +1,8 @@
 #include "GestStand.h"
 #include "UserMenu.h"
 #include "FactoryClass.h"
-
-
+#include <memory.h>
+#include <iterator>
 
 std::unique_ptr<Vehicle> deduceVehicleFromUser(const std::string& userVehicleType) {
 	std::unique_ptr<Vehicle> myVehicle;
@@ -123,25 +123,97 @@ void GestStand::listVehiclesStand(std::string& standCode, VehicleStandGroup& obj
 
 	/*Just other way to do it*/
 	const auto& standVehicleInventory = objectStand.getStandVehicleInventory();
+	bool condeAlreadyFound = false;
 
 	for (const auto& it : m_standCity) {
 
 
 		const std::vector<size_t> vec = it.second;
 
-		for (auto v : vec) {
-			std::string currentStandCode = standVehicleInventory[v]->getStand().getCode();
-			if (currentStandCode == standCode) {
-				const auto& vehicleConteiner = standVehicleInventory[v]->getVehiclesConteiner();
-				for (const auto& it : vehicleConteiner) {
-					std::cout << "Vehicle information: " << it->toString() << std::endl;
+		if (!condeAlreadyFound) {
+			for (auto v : vec) {
+				std::string currentStandCode = standVehicleInventory[v]->getStand().getCode();
+				if (currentStandCode == standCode) {
+					const auto& vehicleConteiner = standVehicleInventory[v]->getVehiclesConteiner();
+					if (vehicleConteiner.empty()) {
+						std::cout << "There are no vehicles available at the stand \n\n";
+						return;
+					}
+					for (const auto& it : vehicleConteiner) {
+						std::cout << "Vehicle information: " << it->toString() << std::endl;
+					}
+					condeAlreadyFound = true;
 				}
+				else
+					std::cerr << "The stand is not compatible with any of stands name/code. \n";
 			}
-
 		}
 	}
 	std::cout << std::endl;
 }
 
+
+void GestStand::moveVehicleStand(std::string& sourceStandCode, std::string& destinationStandCode, const unsigned int vehicleID, VehicleStandGroup& objectStand) {
+
+	auto& standVehicleInventory = objectStand.getStandVehicleInventory();
+	std::unique_ptr<Vehicle> vehicleTemporaryMoveStaand;
+
+	bool flagVehicleSource{ false };
+	bool flagVehicleDes{ false };
+
+	/*Origin Stand*/
+	for (auto& it : standVehicleInventory) {
+		if (!flagVehicleSource && it->getStand().getCode() == sourceStandCode) {
+			auto& vehicleConteiner = it->getVehiclesConteiner();
+
+			unsigned int idxCounter{};
+			for (auto& veh : vehicleConteiner) {
+				if (veh->getVehicleID() == vehicleID) {
+					vehicleTemporaryMoveStaand = std::move(veh);
+					vehicleConteiner.erase(vehicleConteiner.begin() + idxCounter);
+					vehicleConteiner.shrink_to_fit();
+					flagVehicleSource = true;  
+					break;
+				}
+				idxCounter++;
+			}
+		}
+	}
+
+	/*Destination Stand*/
+	if (!flagVehicleDes && vehicleTemporaryMoveStaand) {
+		for (auto& it : standVehicleInventory) {
+			if (it->getStand().getCode() == destinationStandCode) {
+				auto& vehicleConteinerTemp = it->getVehiclesConteiner();
+				vehicleConteinerTemp.push_back(std::move(vehicleTemporaryMoveStaand));
+				flagVehicleDes = true;
+				std::cout << "Vehicle moved with success! \n";
+				break;
+			}
+		}
+	}
+
+}
+
+bool GestStand::checkStandCodes(const std::string& standCode, const VehicleStandGroup& standVehicleInventory) {
+
+	for (const auto& it : standVehicleInventory.getStandVehicleInventory()) {
+		const Stand& stand = it->getStand();
+		if (stand.getCode() == standCode) {
+			return true; 
+		}
+	}
+	return false;  
+}
+
+bool GestStand::checkVehicleID(unsigned int userCheckID, const VehicleStandGroup& standVehicleInventory) {
+	for (const auto& stand : standVehicleInventory.getStandVehicleInventory()) {
+		for (const auto& vehicle : stand->getVehiclesConteiner()) {
+			if (vehicle->getVehicleID() == userCheckID)
+				return true;
+		}
+	}
+	return false;
+}
 
 

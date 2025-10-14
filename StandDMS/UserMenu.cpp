@@ -65,7 +65,7 @@ void userMenu() {
 		std::cout << "Option number: ";
 
 		while (true) {
-
+			
 			try {
 				std::cin.exceptions(std::ios::failbit | std::ios::badbit); /* Activate failbit & badbit exception */
 				std::cin >> userOpt;
@@ -96,7 +96,7 @@ void userMenu() {
 		case options::InsertStandCity: {
 			while (true) {
 
-				std::cout << "Stand Creator \n";
+				std::cout << "--> " << "Stand Creator" << " <-- \n";
 
 				Stand standCreate;
 				auto standObject = UserInputObjectParameterHandler::userStandCreator();
@@ -110,7 +110,8 @@ void userMenu() {
 					continue;
 				}
 				catch (const std::invalid_argument& e) {
-					std::cerr << "\nInvalid code: " << e.what();
+					std::cerr << "\n Invalid code: " << e.what();
+					std::cin.clear();
 					continue;
 				}
 
@@ -134,7 +135,6 @@ void userMenu() {
 				std::string city{};
 				std::cout << "Please insert a valid City:\n";
 				std::getline(std::cin, city);
-				CapitalizeFirstLetter(city);
 
 				if (!gestStandVehicles.getStandCitys(city, VehicleStand)) {
 					continue;
@@ -146,12 +146,14 @@ void userMenu() {
 		}
 
 		case options::InsertVehicleStand: {
+
 			std::string userStandCode{};
 			std::string userCity{};
 			std::string UserVehicleType;
 
 			while (true) {
 
+				/* ont forget, need to confirm user data input!*/
 				gestStandVehicles.listCitysStands(VehicleStand);
 				std::cout << "Which city and stand do want to add vehcle? \n";
 				std::cout << "1º City: ";
@@ -200,7 +202,65 @@ void userMenu() {
 				break;
 			}
 
-			cleanCinBuffer();
+			break;
+		}
+
+
+		case options::MoveVehicleStand: {
+
+			std::string sourceStandCode{};
+			std::string destinationStandCode{};
+			unsigned int standID{};
+
+			while (true) {
+
+				while (true) {
+					std::cout << "Source standCode: ";
+					std::cin >> sourceStandCode;
+
+					if (!gestStandVehicles.checkStandCodes(sourceStandCode, VehicleStand)) {
+						std::cerr << "StandCode not found, please Insert a valid StandCode!";
+						continue;
+					}else
+						break;
+				}
+
+				while (true) {
+					std::cout << "Destination standCode: ";
+					std::cin >> destinationStandCode;
+
+					if (!gestStandVehicles.checkStandCodes(destinationStandCode, VehicleStand)) {
+						std::cerr << "StandCode not found, please Insert a valid StandCode!";
+						continue;
+					}
+					else
+						break;
+				}
+
+				while (true) {
+					std::cout << "Insert desired vehicleID to move (Origin->Destination): ";
+					std::cin >> standID;
+
+					if (!std::cin) {
+						cleanCinBuffer();
+						std::cerr << "Invalid parameter — number expected.\n";
+						continue;
+					}
+
+					if (!gestStandVehicles.checkVehicleID(standID, VehicleStand)) {
+						std::cerr << "StandCode not found, please insert a valid StandCode!\n";
+						continue;
+					}
+
+					break; 
+				}
+
+
+				gestStandVehicles.moveVehicleStand(sourceStandCode, destinationStandCode, standID,  VehicleStand);
+				break;
+			}
+
+			break;
 		}
 
 		default:

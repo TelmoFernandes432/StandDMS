@@ -1,8 +1,10 @@
 #include <sstream>
 #include <string>
 #include "Stand.h"
+#include <algorithm>
 
 std::vector<std::string> Stand::m_codesArray;
+std::string CapitalizeFirstLetter(const std::string& code);
 
 namespace standCaution {
 	static const int MIN_STAND_NUMBER = 1;
@@ -17,12 +19,16 @@ int Stand::standNumberCheck(int standNumber) {
 }
 
 
-void Stand::addCode(const std::string& code) {
-	if (!existCode(code)) {
-		m_codesArray.push_back(code);
+void Stand::addCode(std::string& code) {
+
+	auto codeCapitalized = CapitalizeFirstLetter(code);
+
+	for (const auto& it : m_codesArray) {
+		if (codeCapitalized == it) {
+			throw std::invalid_argument("Duplicated element: " + code);
+		}
 	}
-	else
-		throw std::invalid_argument("Duplicated element " + code + '\n');
+	m_codesArray.push_back(codeCapitalized);
 }
 
 bool Stand::existCode(const std::string& code) {
@@ -44,5 +50,6 @@ std::string Stand::toString() const {
 
 	return oss.str();
 }
+
 
 

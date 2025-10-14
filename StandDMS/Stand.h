@@ -19,7 +19,7 @@ private:
     static std::vector<std::string> m_codesArray; /*This belongs to the class not only to object*/
 
     static std::string generateCode(const std::string& standCity, int standNumber);
-    static void addCode(const std::string& code);
+    static void addCode(std::string& code);
     static bool existCode(const std::string& code);
     static int standNumberCheck(int standNumber);
 

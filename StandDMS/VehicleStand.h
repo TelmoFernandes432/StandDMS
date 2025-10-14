@@ -15,8 +15,9 @@ protected:
 
 public:
 
+
 	VehicleStandGroup() {
-		m_standVehicleInventory.reserve(3); /*At least reserve 3*/
+		m_standVehicleInventory.reserve(3); /*At least reserve 3 in first instance*/
 	}
 
 	const std::vector<std::unique_ptr<StandVehicleAggregate>>& getStandVehicleInventory() const {
@@ -28,6 +29,8 @@ public:
 	StandFunctionReturnValue::valueReturn insertNewVehicleStand(std::unique_ptr<Vehicle> vehicle, Stand& stand);
 
 	const std::string toString();
+
+	virtual ~VehicleStandGroup() = default;
 
 };
 
@@ -44,12 +47,13 @@ public:
 
 	void setStand(const Stand& stand) { m_stand = stand; };
 	void setVehicle(std::unique_ptr<Vehicle> vehicle) { m_vehiclesConteiner.push_back(std::move(vehicle)); };
-	Stand getStand() const { return m_stand; };
+	Stand getStand()  { return m_stand; };
 
-	const std::vector<std::unique_ptr<Vehicle>>& getVehiclesConteiner() const {
+	std::vector<std::unique_ptr<Vehicle>>& getVehiclesConteiner()  { /*don't const this!*/
 		return m_vehiclesConteiner;
 	}
 
+	~StandVehicleAggregate() override = default;
 };
 
 

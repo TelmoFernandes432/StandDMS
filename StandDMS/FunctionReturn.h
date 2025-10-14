@@ -44,6 +44,7 @@ namespace UserInputObjectParameterHandler {      //Coupe(unsigned int licensePla
     }
 
     inline std::string brand() {
+        std::cin.clear();
         std::string userbrand;
 
         while (true) {
